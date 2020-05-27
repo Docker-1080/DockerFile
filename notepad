@@ -1,0 +1,31 @@
+docker run -it 宿主机Path:鲸鱼Path:ro ImageName
+docker ps 查看镜像运行的进程
+docekr images 查看当前系统的docker镜像
+docker rm  -f 删除镜像
+docker build -f Dockerfile -t nameSpace/centos .
+docker inspect  + image ID 查看docker镜像的具体信息(以json格式返回)
+#共享数据卷 数据卷之间相互共享 直到没用与之共享的镜像才停止共享
+docker run --name test01 -it --volumes-from xiaolin/centos
+docker run --name test02 -it --volumes-from xiaolin/centos
+docker run --naem test03 -it --volumes-from xiaolin/centos
+Dockerfile 文件的编写
+scratch 
+###############################################################################
+                        Docker 基础                         
+###############################################################################
+FROM            #基础镜像
+MAINTAINER      #维护者的姓名和邮箱
+RUN             #构建用户时执行的额外命名 
+EXPOSE          #当前容器对外暴露的端口号
+WORKDIR         #终端默认登陆的路径
+ENV             #用来构建系统镜像的环境变量
+ADD             #将Dockerfile下的一个包拷贝到镜像并且解压
+COPY            #拷贝文件到镜像  宿主机的路径:docker镜像的路径:ro（默认可读写） copy src:desc 
+VOLUME          #数据卷，用于共享数据
+CMD             #指定一个容器时启动的命令(只是运行最后一个CMD中的命令，之前的都会被覆盖掉)
+ENTRYPOINT      #指定一个容器时启动的命令
+ONBUILD         #当构建一个被继承的dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild会被触发 
+#######################################################################################################
+
+
+
